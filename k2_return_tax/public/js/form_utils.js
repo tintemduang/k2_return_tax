@@ -40,7 +40,6 @@ form_utils.style_button = function (frm, fieldname, style = "default") {
     );
 
     switch (style) {
-        case "blue":
         case "info":
             btn.addClass("btn-info");
             break;
