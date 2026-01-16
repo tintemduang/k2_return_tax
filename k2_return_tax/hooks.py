@@ -28,6 +28,10 @@ app_license = "mit"
 # app_include_css = "/assets/k2_return_tax/css/k2_return_tax.css"
 # app_include_js = "/assets/k2_return_tax/js/k2_return_tax.js"
 
+app_include_js = [
+    "/assets/k2_return_tax/js/form_utils.js"
+]
+
 # include js, css files in header of web template
 # web_include_css = "/assets/k2_return_tax/css/k2_return_tax.css"
 # web_include_js = "/assets/k2_return_tax/js/k2_return_tax.js"

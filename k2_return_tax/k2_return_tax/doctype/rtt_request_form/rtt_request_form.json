@@ -30,7 +30,12 @@
   "section_break_ahwg",
   "approver_registration",
   "section_break_ktqz",
-  "attachment_table"
+  "attachment_table",
+  "section_break_pgcf",
+  "column_break_dxbd",
+  "column_break_ptty",
+  "request_button",
+  "column_break_vkpj"
  ],
  "fields": [
   {
@@ -159,13 +164,34 @@
    "fieldtype": "Table",
    "label": "Attachment",
    "options": "RTT Attachment"
+  },
+  {
+   "fieldname": "section_break_pgcf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "request_button",
+   "fieldtype": "Button",
+   "label": "Request"
+  },
+  {
+   "fieldname": "column_break_dxbd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ptty",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_vkpj",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-16 23:20:50.287918",
+ "modified": "2026-01-16 23:35:02.197457",
  "modified_by": "Administrator",
  "module": "K2 Return Tax",
  "name": "RTT Request Form",
