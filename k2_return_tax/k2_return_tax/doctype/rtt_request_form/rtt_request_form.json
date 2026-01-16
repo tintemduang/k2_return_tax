@@ -1,26 +1,175 @@
 {
  "actions": [],
- "allow_rename": 1,
+ "autoname": "format:RTT-{YY}{MM}-{####}",
  "creation": "2026-01-16 22:44:17.954280",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "document_number"
+  "document_number",
+  "document_status",
+  "employee_name",
+  "employee_code",
+  "branch",
+  "column_break_rxnw",
+  "agreement_number",
+  "brand",
+  "model",
+  "plate_number",
+  "vehicle_detail",
+  "is_repossessed",
+  "column_break_oxym",
+  "next_tax_renewal_date",
+  "tax_renewal_amount",
+  "vehicle_inspection_fee",
+  "other_fee",
+  "column_break_gkqz",
+  "transfer_amount",
+  "transfer_bank_account",
+  "transfer_account_name",
+  "transfer_account_number",
+  "section_break_ahwg",
+  "approver_registration",
+  "section_break_ktqz",
+  "attachment_table"
  ],
  "fields": [
   {
    "fieldname": "document_number",
    "fieldtype": "Data",
    "label": "Document Number"
+  },
+  {
+   "fieldname": "document_status",
+   "fieldtype": "Data",
+   "label": "Status"
+  },
+  {
+   "fieldname": "employee_code",
+   "fieldtype": "Data",
+   "label": "Employee Code"
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name"
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Data",
+   "label": "Branch"
+  },
+  {
+   "fieldname": "agreement_number",
+   "fieldtype": "Data",
+   "label": "Agreement Number"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_repossessed",
+   "fieldtype": "Check",
+   "label": "Is Repossessed"
+  },
+  {
+   "fieldname": "column_break_rxnw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "brand",
+   "fieldtype": "Data",
+   "label": "Brand"
+  },
+  {
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "Model"
+  },
+  {
+   "fieldname": "plate_number",
+   "fieldtype": "Data",
+   "label": "Plate Number"
+  },
+  {
+   "fieldname": "vehicle_detail",
+   "fieldtype": "Small Text",
+   "label": "Vehicle Detail"
+  },
+  {
+   "fieldname": "column_break_oxym",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "next_tax_renewal_date",
+   "fieldtype": "Date",
+   "label": "Next Tax Renewal Date"
+  },
+  {
+   "fieldname": "tax_renewal_amount",
+   "fieldtype": "Float",
+   "label": "Tax Renewal Amount"
+  },
+  {
+   "fieldname": "vehicle_inspection_fee",
+   "fieldtype": "Float",
+   "label": "Vehicle Inspection Fee"
+  },
+  {
+   "fieldname": "other_fee",
+   "fieldtype": "Float",
+   "label": "Other Fee"
+  },
+  {
+   "fieldname": "column_break_gkqz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "transfer_amount",
+   "fieldtype": "Float",
+   "label": "Transfer Amount"
+  },
+  {
+   "fieldname": "transfer_bank_account",
+   "fieldtype": "Data",
+   "label": "Transfer Bank Account"
+  },
+  {
+   "fieldname": "transfer_account_name",
+   "fieldtype": "Data",
+   "label": "Transfer Account Name"
+  },
+  {
+   "fieldname": "transfer_account_number",
+   "fieldtype": "Data",
+   "label": "Transfer Account Number"
+  },
+  {
+   "fieldname": "section_break_ahwg",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "approver_registration",
+   "fieldtype": "Data",
+   "label": "Approver (Registration)"
+  },
+  {
+   "fieldname": "section_break_ktqz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "attachment_table",
+   "fieldtype": "Table",
+   "label": "Attachment",
+   "options": "RTT Attachment"
   }
  ],
  "grid_page_length": 50,
+ "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-16 22:45:05.980623",
+ "modified": "2026-01-16 23:20:50.287918",
  "modified_by": "Administrator",
  "module": "K2 Return Tax",
  "name": "RTT Request Form",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
