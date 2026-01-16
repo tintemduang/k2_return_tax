@@ -29,6 +29,7 @@
   "transfer_account_number",
   "section_break_ahwg",
   "approver_registration",
+  "remark",
   "section_break_ktqz",
   "attachment_table",
   "section_break_pgcf",
@@ -185,13 +186,18 @@
    "fieldname": "send_request_button",
    "fieldtype": "Button",
    "label": "Send Request"
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "label": "Remark"
   }
  ],
  "grid_page_length": 50,
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-17 00:13:21.430277",
+ "modified": "2026-01-17 00:24:05.823641",
  "modified_by": "Administrator",
  "module": "K2 Return Tax",
  "name": "RTT Request Form",
