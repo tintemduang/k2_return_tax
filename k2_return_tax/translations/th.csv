@@ -1,0 +1,20 @@
+Document Number, หมายเลขเอกสาร,
+Employee Name, ชื่อพนักงาน,
+Employee Code, รหัสพนักงาน,
+Branch, สาขา,
+Agreement Number, หมายเลขสัญญา,
+Model, รุ่น
+Plate Number, หมายเลขทะเบียน
+Vehicle Detail, รายละเอียดรถ
+Is Repossessed, ถูกยึดหรือไม่
+Next Tax Renewal Date, วันที่ต่อภาษีครั้งถัดไป
+Tax Renewal Amount, จำนวนเงินต่อภาษี
+Vehicle Inspection Fee, ค่าตรวจสภาพรถ
+Other Fee, ค่าธรรมเนียมอื่น ๆ
+Transfer Amount, จำนวนเงินโอน
+Transfer Bank Account, บัญชีธนาคารโอนเงิน
+Transfer Account Name, ชื่อบัญชีโอนเงิน
+Transfer Account Number, หมายเลขบัญชีโอนเงิน
+Approver (Registration), ผู้อนุมัติ (ทะเบียน)
+Attachment List, รายการเอกสารแนบ
+Send Request, ส่งพิจารณา

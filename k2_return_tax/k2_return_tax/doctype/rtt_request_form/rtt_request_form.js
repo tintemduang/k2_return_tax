@@ -3,7 +3,7 @@
 
 frappe.ui.form.on('RTT Request Form', {
     refresh(frm) {
-        form_utils.align_button(frm, "request_button", "center");
-        form_utils.style_button(frm, "request_button", "blue");
+        form_utils.align_button(frm, "send_request_button", "center");
+        form_utils.style_button(frm, "send_request_button", "info");
     }
 });
