@@ -1,10 +1,12 @@
+RTT Request Form, แบบฟอร์มขอคืนภาษีรถใช้งาน
 Document Number, หมายเลขเอกสาร,
 Employee Name, ชื่อพนักงาน,
 Employee Code, รหัสพนักงาน,
 Branch, สาขา,
 Agreement Number, เลขที่สัญญา,
 Model, รุ่น
-Plate Number, ทะเบียนรถ
+Plate Number, 
+Vehicle Type, ประเภทรถ
 Vehicle Detail, รายละเอียดรถ
 Is Repossessed, เป็นรถยึด
 Next Tax Renewal Date, วันที่ต่อภาษีครั้งถัดไป

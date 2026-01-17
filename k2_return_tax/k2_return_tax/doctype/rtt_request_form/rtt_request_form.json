@@ -15,6 +15,7 @@
   "brand",
   "model",
   "plate_number",
+  "vehicle_type",
   "vehicle_detail",
   "is_repossessed",
   "column_break_oxym",
@@ -52,17 +53,23 @@
   {
    "fieldname": "employee_code",
    "fieldtype": "Data",
-   "label": "Employee Code"
+   "in_list_view": 1,
+   "label": "Employee Code",
+   "reqd": 1
   },
   {
    "fieldname": "employee_name",
    "fieldtype": "Data",
-   "label": "Employee Name"
+   "in_list_view": 1,
+   "label": "Employee Name",
+   "reqd": 1
   },
   {
    "fieldname": "branch",
    "fieldtype": "Data",
-   "label": "Branch"
+   "in_list_view": 1,
+   "label": "Branch",
+   "reqd": 1
   },
   {
    "fieldname": "agreement_number",
@@ -82,17 +89,21 @@
   {
    "fieldname": "brand",
    "fieldtype": "Data",
-   "label": "Brand"
+   "in_list_view": 1,
+   "label": "Brand",
+   "reqd": 1
   },
   {
    "fieldname": "model",
    "fieldtype": "Data",
-   "label": "Model"
+   "label": "Model",
+   "reqd": 1
   },
   {
    "fieldname": "plate_number",
    "fieldtype": "Data",
-   "label": "Plate Number"
+   "label": "Plate Number",
+   "reqd": 1
   },
   {
    "fieldname": "vehicle_detail",
@@ -191,13 +202,19 @@
    "fieldname": "remark",
    "fieldtype": "Small Text",
    "label": "Remark"
+  },
+  {
+   "fieldname": "vehicle_type",
+   "fieldtype": "Select",
+   "label": "Vehicle Type",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-17 00:24:05.823641",
+ "modified": "2026-01-17 00:29:50.039388",
  "modified_by": "Administrator",
  "module": "K2 Return Tax",
  "name": "RTT Request Form",
