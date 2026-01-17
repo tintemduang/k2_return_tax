@@ -5,13 +5,19 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "column_break_bxxk",
   "document_number",
+  "column_break_bsed",
+  "agreement_number",
+  "column_break_smfa",
   "document_status",
+  "document_status_description",
+  "section_break_uasi",
+  "employee_infomation_column",
   "employee_name",
   "employee_code",
   "branch",
   "column_break_rxnw",
-  "agreement_number",
   "brand",
   "model",
   "plate_number",
@@ -47,8 +53,10 @@
   },
   {
    "fieldname": "document_status",
-   "fieldtype": "Data",
-   "label": "Status"
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Status",
+   "options": "RTT Form Status"
   },
   {
    "fieldname": "employee_code",
@@ -84,7 +92,8 @@
   },
   {
    "fieldname": "column_break_rxnw",
-   "fieldtype": "Column Break"
+   "fieldtype": "Column Break",
+   "label": "Vehicle Information"
   },
   {
    "fieldname": "brand",
@@ -112,7 +121,8 @@
   },
   {
    "fieldname": "column_break_oxym",
-   "fieldtype": "Column Break"
+   "fieldtype": "Column Break",
+   "label": "Tax Information"
   },
   {
    "fieldname": "next_tax_renewal_date",
@@ -136,7 +146,8 @@
   },
   {
    "fieldname": "column_break_gkqz",
-   "fieldtype": "Column Break"
+   "fieldtype": "Column Break",
+   "label": "Transfer Information"
   },
   {
    "fieldname": "transfer_amount",
@@ -208,13 +219,41 @@
    "fieldtype": "Select",
    "label": "Vehicle Type",
    "reqd": 1
+  },
+  {
+   "fetch_from": "document_status.description",
+   "fieldname": "document_status_description",
+   "fieldtype": "Data",
+   "is_virtual": 1,
+   "label": "Status"
+  },
+  {
+   "fieldname": "column_break_bxxk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_bsed",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_smfa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_uasi",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "employee_infomation_column",
+   "fieldtype": "Column Break",
+   "label": "Employee Infomation"
   }
  ],
  "grid_page_length": 50,
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-17 00:29:50.039388",
+ "modified": "2026-01-17 18:28:37.789320",
  "modified_by": "Administrator",
  "module": "K2 Return Tax",
  "name": "RTT Request Form",

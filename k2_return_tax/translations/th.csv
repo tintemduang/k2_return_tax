@@ -5,7 +5,7 @@ Employee Code, รหัสพนักงาน,
 Branch, สาขา,
 Agreement Number, เลขที่สัญญา,
 Model, รุ่น
-Plate Number, 
+Plate Number, หมายเลขทะเบียน 
 Vehicle Type, ประเภทรถ
 Vehicle Detail, รายละเอียดรถ
 Is Repossessed, เป็นรถยึด
@@ -21,3 +21,8 @@ Approver (Registration), ผู้อนุมัติ (ฝ่ายทะเ�
 Remark, หมายเหตุ
 Attachment List, รายการเอกสารแนบ
 Send Request, ส่งพิจารณา
+Confirm Action, ยืนยันการดำเนินการ
+Employee Infomation, ข้อมูลพนักงาน
+Vehicle Information, ข้อมูลรถ
+Tax Information, ข้อมูลภาษี
+Transfer Information, ข้อมูลการโอนเงิน
