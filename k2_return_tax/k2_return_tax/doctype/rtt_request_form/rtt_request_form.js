@@ -19,7 +19,9 @@ frappe.ui.form.on('RTT Request Form', {
                 {
                     fieldtype: "HTML",
                     fieldname: "confirm_msg",
-                    options: `<div style="font-size:14px">"คุณต้องการส่งเอกสารนี้เพื่อพิจารณาอนุมัติใช่หรือไม่?"</div>`
+                    options: `<div style="font-size:14px">
+                        ${__('Confirm to send the document for approval?')}
+                    </div>`
                 }
             ],
             primary_action_label: __("Confirm"),
@@ -50,11 +52,16 @@ function set_form_header(frm) {
 
 function set_document_defaults(frm) {
     if (frm.is_new()) {
-        frm.set_value("document_number", "RTT-YY-MM-XXXX");
-        frm.set_value("document_status", "1000");
+        frm.set_value('document_number', 'RTT-YY-MM-XXXX');
+        frm.set_value('document_status', '1000');
+        frm.set_value('employee_name', frappe.session.user_fullname);
+
+        get_user(function(user) {
+            frm.set_value('employee_code', user.username);
+        });
     }
     else {
-        frm.set_value("document_number", frm.doc.name);
+        frm.set_value('document_number', frm.doc.name);
     }
 }
 
@@ -71,4 +78,20 @@ function set_description_field(frm) {
             ${__('*If branch name is incorrect or missing.. Please notify IT.')}
         </b>`
     );
+}
+
+function get_user(callback) {
+    frappe.call({
+        method: "frappe.client.get",
+        args: {
+            doctype: "User",
+            name: frappe.session.user,
+            fields: ["username"]
+        },
+        callback: function (r) {
+            if (r.message) {
+                callback(r.message);
+            }
+        }
+    });
 }
