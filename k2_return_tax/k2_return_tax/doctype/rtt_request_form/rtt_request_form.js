@@ -6,7 +6,7 @@ frappe.ui.form.on('RTT Request Form', {
 
     onload: function(frm) {
         set_form_header(frm);
-        set_new_document_defaults(frm);
+        set_document_defaults(frm);
         set_readonly_fields(frm);
         set_description_field(frm);
     },
@@ -42,16 +42,19 @@ function set_form_header(frm) {
         'options',
         `
         <div style="font-size:18px;font-weight:bold;">
-            แบบฟอร์มขออนุมัติคืนภาษีรถ
+            ${__('RTT Request Form')}
         </div>
         `
     );
 }
 
-function set_new_document_defaults(frm) {
+function set_document_defaults(frm) {
     if (frm.is_new()) {
         frm.set_value("document_number", "RTT-YY-MM-XXXX");
         frm.set_value("document_status", "1000");
+    }
+    else {
+        frm.set_value("document_number", frm.doc.name);
     }
 }
 
