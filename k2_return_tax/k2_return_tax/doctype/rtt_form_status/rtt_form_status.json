@@ -8,7 +8,8 @@
  "field_order": [
   "code",
   "short_description",
-  "description"
+  "description",
+  "state"
  ],
  "fields": [
   {
@@ -35,12 +36,18 @@
    "in_standard_filter": 1,
    "label": "Short Description",
    "unique": 1
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "State"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-17 18:03:37.896120",
+ "modified": "2026-01-18 14:09:27.255210",
  "modified_by": "Administrator",
  "module": "K2 Return Tax",
  "name": "RTT Form Status",

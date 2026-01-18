@@ -33,7 +33,8 @@ app_include_css = [
 ]
 
 app_include_js = [
-    "/assets/k2_return_tax/js/form_utils.js"
+    "/assets/k2_return_tax/js/form_utils.js",
+    "/assets/k2_return_tax/js/progress_bar.js"
 ]
 
 # include js, css files in header of web template

@@ -2,7 +2,7 @@ frappe.ui.form.on('RTT Request Form', {
     refresh(frm) {
         form_utils.align_button(frm, "send_request_button", "center");
         form_utils.style_button(frm, "send_request_button", "info");
-
+        progress_bar.render_progress_bar(frm);
         validate_add_attachments(frm);
     },
 
@@ -117,3 +117,4 @@ function validate_add_attachments(frm) {
         return original();
     };
 }
+

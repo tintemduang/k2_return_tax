@@ -1,5 +1,3 @@
-// my_app/public/js/form_utils.js
-
 window.form_utils = window.form_utils || {};
 
 /**
