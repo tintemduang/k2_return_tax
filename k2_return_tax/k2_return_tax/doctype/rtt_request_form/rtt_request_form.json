@@ -5,20 +5,20 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "details_tab",
   "workflow_state_section",
   "workflow_state_html",
   "header_section",
   "form_header_html",
-  "section_break_fmth",
+  "form_section",
   "column_break_bxxk",
   "document_number",
   "column_break_bsed",
   "agreement_number",
   "column_break_smfa",
-  "document_status",
   "document_status_description",
   "column_break_hzjk",
-  "section_break_uasi",
+  "details_section",
   "employee_infomation_column",
   "employee_code",
   "employee_name",
@@ -40,16 +40,19 @@
   "transfer_bank_account",
   "transfer_account_name",
   "transfer_account_number",
-  "section_break_ahwg",
+  "approver_section",
   "approver_registration",
-  "remark",
-  "section_break_ktqz",
+  "attachment_section",
   "attachment_table",
-  "section_break_pgcf",
+  "action_history_section",
+  "action_history_table",
+  "action_section",
   "column_break_dxbd",
   "column_break_ptty",
   "send_request_button",
-  "column_break_vkpj"
+  "column_break_vkpj",
+  "admin_tab",
+  "document_status"
  ],
  "fields": [
   {
@@ -60,7 +63,6 @@
   {
    "fieldname": "document_status",
    "fieldtype": "Link",
-   "hidden": 1,
    "label": "Status",
    "options": "RTT Form Status"
   },
@@ -189,28 +191,16 @@
    "reqd": 1
   },
   {
-   "fieldname": "section_break_ahwg",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "approver_registration",
    "fieldtype": "Data",
    "label": "Approver (Registration)",
    "reqd": 1
   },
   {
-   "fieldname": "section_break_ktqz",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "attachment_table",
    "fieldtype": "Table",
    "label": "Attachment List",
    "options": "RTT Attachment"
-  },
-  {
-   "fieldname": "section_break_pgcf",
-   "fieldtype": "Section Break"
   },
   {
    "fieldname": "column_break_dxbd",
@@ -230,14 +220,10 @@
    "label": "Send Request"
   },
   {
-   "fieldname": "remark",
-   "fieldtype": "Small Text",
-   "label": "Remark"
-  },
-  {
    "fieldname": "vehicle_type",
    "fieldtype": "Select",
    "label": "Vehicle Type",
+   "options": "\u0e23\u0e16 C \u0e01\u0e25\u0e38\u0e48\u0e21 7 s08\n\u0e23\u0e16 M \u0e01\u0e25\u0e38\u0e48\u0e21 7 s09",
    "reqd": 1
   },
   {
@@ -260,10 +246,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "section_break_uasi",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "employee_infomation_column",
    "fieldtype": "Column Break",
    "label": "Employee Infomation"
@@ -272,10 +254,6 @@
    "fieldname": "form_header_html",
    "fieldtype": "HTML",
    "label": "Form Header"
-  },
-  {
-   "fieldname": "section_break_fmth",
-   "fieldtype": "Section Break"
   },
   {
    "fieldname": "column_break_hzjk",
@@ -294,13 +272,54 @@
    "fieldname": "workflow_state_html",
    "fieldtype": "HTML",
    "label": "Workflow State"
+  },
+  {
+   "fieldname": "action_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "form_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "details_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "approver_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "attachment_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "action_history_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "action_history_table",
+   "fieldtype": "Table",
+   "label": "Action History",
+   "options": "RTT Action History"
+  },
+  {
+   "fieldname": "details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "admin_tab",
+   "fieldtype": "Tab Break",
+   "hidden": 1,
+   "label": "Admin"
   }
  ],
  "grid_page_length": 50,
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-18 15:38:35.870224",
+ "modified": "2026-01-18 19:41:59.744282",
  "modified_by": "Administrator",
  "module": "K2 Return Tax",
  "name": "RTT Request Form",

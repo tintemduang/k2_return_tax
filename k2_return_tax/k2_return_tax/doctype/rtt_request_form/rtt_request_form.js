@@ -5,6 +5,10 @@ frappe.ui.form.on('RTT Request Form', {
         form_utils.align_button(frm, "attachment_info_button", "right");
         progress_bar.render_progress_bar(frm);
         validate_add_attachments(frm);
+        set_hide_add_remove_buttons(frm, 'action_history_table');
+        set_hide_selected_option(frm, 'action_history_table');
+        set_hide_section(frm);
+        get_document_description(frm);
     },
 
     onload: function(frm) {
@@ -31,7 +35,17 @@ frappe.ui.form.on('RTT Request Form', {
                     options: `<div style="font-size:14px;">
                         ${__('Confirm to send the document for approval?')}
                     </div>`
-                }
+                },
+                {
+                    fieldtype: "data",
+                    fieldname: "username",
+                },
+                {
+                    fieldtype: "link",
+                    options: "RTT Action",
+                    fieldname: "action",
+                },
+
             ],
             primary_action_label: __("Confirm"),
             primary_action() {
@@ -77,6 +91,7 @@ function set_document_defaults(frm) {
 function set_readonly_fields(frm) {
     frm.set_df_property('document_number', 'read_only', 1);
     frm.set_df_property('document_status', 'read_only', 1);
+    frm.set_df_property('action_history_table', 'read_only', 1);
 }
 
 function set_description_field(frm) {
@@ -133,3 +148,38 @@ function validate_add_attachments(frm) {
     };
 }
 
+function set_hide_add_remove_buttons(frm, child_table_fieldname) {
+    if (!frm.fields_dict[child_table_fieldname]) return;
+    const grid = frm.fields_dict[child_table_fieldname].grid;
+    $(grid.wrapper).find('.grid-add-row').hide();
+    $(grid.wrapper).find('.grid-remove-rows').hide();
+};
+
+function set_hide_selected_option(frm, child_table_fieldname) {
+    const grid = frm.fields_dict[child_table_fieldname].$wrapper;
+    grid.find(".row-check, .grid-check-all").remove();
+}
+
+function set_hide_section(frm) {
+    if (frm.is_new()) {
+        frm.set_df_property('action_history_table', 'hidden', 1);
+    }
+}
+
+function get_document_description(frm) {
+    frappe.call({
+        method: "frappe.client.get_value",
+        args: {
+            doctype: "RTT Form Status",
+            filters: {
+                name: frm.doc.document_status
+            },
+            fieldname: "description"
+        },
+        callback: function (r) {
+            if (r.message) {
+                frm.set_value('document_status_description', r.message.description);
+            }
+        }
+    });
+}

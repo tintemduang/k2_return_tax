@@ -34,3 +34,11 @@ Accounting Department, ฝ่ายบัญชี
 Completed, เสร็จสิ้น
 Missing Fields, ข้อมูลที่ยังไม่ระบุ
 Mandatory fields required in {0},จำเป็นต้องระบุข้อมูลในฟิลด์ที่มีเครื่องหมายดอกจัน {0},
+Action History, ประวัติการดำเนินการ
+Action Date Time, วันที่และเวลาที่ดำเนินการ
+No., ลำดับ
+Create Document, สร้างเอกสาร
+Approve, อนุมัติ
+Reject, ปฏิเสธ
+Resubmit, ส่งพิจารณาใหม่
+Submit, ส่งพิจารณา
