@@ -21,7 +21,7 @@ frappe.ui.form.on('RTT Request Form', {
                 {
                     fieldtype: "HTML",
                     fieldname: "confirm_msg",
-                    options: `<div style="font-size:14px">
+                    options: `<div style="font-size:14px;">
                         ${__('Confirm to send the document for approval?')}
                     </div>`
                 }
@@ -45,7 +45,7 @@ function set_form_header(frm) {
         'form_header_html',
         'options',
         `
-        <div style="font-size:18px;font-weight:bold;">
+        <div class="doc-header">
             ${__('RTT Request Form')}
         </div>
         `

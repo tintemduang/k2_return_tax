@@ -5,6 +5,9 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "workflow_state_section",
+  "workflow_state_html",
+  "header_section",
   "form_header_html",
   "section_break_fmth",
   "column_break_bxxk",
@@ -120,7 +123,8 @@
   {
    "fieldname": "vehicle_detail",
    "fieldtype": "Small Text",
-   "label": "Vehicle Detail"
+   "label": "Vehicle Detail",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_oxym",
@@ -130,22 +134,29 @@
   {
    "fieldname": "next_tax_renewal_date",
    "fieldtype": "Date",
-   "label": "Next Tax Renewal Date"
+   "label": "Next Tax Renewal Date",
+   "reqd": 1
   },
   {
    "fieldname": "tax_renewal_amount",
    "fieldtype": "Float",
-   "label": "Tax Renewal Amount"
+   "label": "Tax Renewal Amount",
+   "non_negative": 1,
+   "reqd": 1
   },
   {
    "fieldname": "vehicle_inspection_fee",
    "fieldtype": "Float",
-   "label": "Vehicle Inspection Fee"
+   "label": "Vehicle Inspection Fee",
+   "non_negative": 1,
+   "reqd": 1
   },
   {
    "fieldname": "other_fee",
    "fieldtype": "Float",
-   "label": "Other Fee"
+   "label": "Other Fee",
+   "non_negative": 1,
+   "reqd": 1
   },
   {
    "fieldname": "column_break_gkqz",
@@ -155,22 +166,27 @@
   {
    "fieldname": "transfer_amount",
    "fieldtype": "Float",
-   "label": "Transfer Amount"
+   "label": "Transfer Amount",
+   "non_negative": 1,
+   "reqd": 1
   },
   {
    "fieldname": "transfer_bank_account",
    "fieldtype": "Data",
-   "label": "Transfer Bank Account"
+   "label": "Transfer Bank Account",
+   "reqd": 1
   },
   {
    "fieldname": "transfer_account_name",
    "fieldtype": "Data",
-   "label": "Transfer Account Name"
+   "label": "Transfer Account Name",
+   "reqd": 1
   },
   {
    "fieldname": "transfer_account_number",
    "fieldtype": "Data",
-   "label": "Transfer Account Number"
+   "label": "Transfer Account Number",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_ahwg",
@@ -179,7 +195,8 @@
   {
    "fieldname": "approver_registration",
    "fieldtype": "Data",
-   "label": "Approver (Registration)"
+   "label": "Approver (Registration)",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_ktqz",
@@ -263,13 +280,27 @@
   {
    "fieldname": "column_break_hzjk",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "header_section",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "workflow_state_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "workflow_state_html",
+   "fieldtype": "HTML",
+   "label": "Workflow State"
   }
  ],
  "grid_page_length": 50,
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-18 11:24:42.816032",
+ "modified": "2026-01-18 12:00:40.843455",
  "modified_by": "Administrator",
  "module": "K2 Return Tax",
  "name": "RTT Request Form",
