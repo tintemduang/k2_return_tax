@@ -5,12 +5,10 @@ frappe.ui.form.on('RTT Request Form', {
     },
 
     onload: function(frm) {
-        if (frm.is_new()) {
-            frm.set_value("document_number", "RTT-YY-MM-XXXX");
-            frm.set_value("document_status", "1000");
-        }
-        frm.set_df_property('document_number', 'read_only', 1);
-        frm.set_df_property('document_status', 'read_only', 1);
+        set_form_header(frm);
+        set_new_document_defaults(frm);
+        set_readonly_fields(frm);
+        set_description_field(frm);
     },
 
     send_request_button(frm) {
@@ -37,3 +35,37 @@ frappe.ui.form.on('RTT Request Form', {
     }
 
 });
+
+function set_form_header(frm) {
+    frm.set_df_property(
+        'form_header_html',
+        'options',
+        `
+        <div style="font-size:18px;font-weight:bold;">
+            แบบฟอร์มขออนุมัติคืนภาษีรถ
+        </div>
+        `
+    );
+}
+
+function set_new_document_defaults(frm) {
+    if (frm.is_new()) {
+        frm.set_value("document_number", "RTT-YY-MM-XXXX");
+        frm.set_value("document_status", "1000");
+    }
+}
+
+function set_readonly_fields(frm) {
+    frm.set_df_property('document_number', 'read_only', 1);
+    frm.set_df_property('document_status', 'read_only', 1);
+}
+
+function set_description_field(frm) {
+    frm.set_df_property(
+        'branch',
+        'description',
+        `<b style="color:red; font-weight:bold;">
+            ${__('*If branch name is incorrect or missing.. Please notify IT.')}
+        </b>`
+    );
+}

@@ -5,6 +5,8 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "form_header_html",
+  "section_break_fmth",
   "column_break_bxxk",
   "document_number",
   "column_break_bsed",
@@ -12,6 +14,7 @@
   "column_break_smfa",
   "document_status",
   "document_status_description",
+  "column_break_hzjk",
   "section_break_uasi",
   "employee_infomation_column",
   "employee_name",
@@ -247,13 +250,26 @@
    "fieldname": "employee_infomation_column",
    "fieldtype": "Column Break",
    "label": "Employee Infomation"
+  },
+  {
+   "fieldname": "form_header_html",
+   "fieldtype": "HTML",
+   "label": "Form Header"
+  },
+  {
+   "fieldname": "section_break_fmth",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_hzjk",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-17 18:28:37.789320",
+ "modified": "2026-01-17 18:51:53.573760",
  "modified_by": "Administrator",
  "module": "K2 Return Tax",
  "name": "RTT Request Form",
