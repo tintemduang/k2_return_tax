@@ -2,6 +2,7 @@ frappe.ui.form.on('RTT Request Form', {
     refresh(frm) {
         form_utils.align_button(frm, "send_request_button", "center");
         form_utils.style_button(frm, "send_request_button", "info");
+        form_utils.align_button(frm, "attachment_info_button", "right");
         progress_bar.render_progress_bar(frm);
         validate_add_attachments(frm);
     },
@@ -120,7 +121,15 @@ function validate_add_attachments(frm) {
                 indicator: 'red'
             });
         }
-        return original();
+
+        original();
+
+        const rows = grid.grid_rows;
+        const last_row = rows[rows.length - 1];
+
+        if (last_row) {
+            last_row.toggle_view(true);
+        }
     };
 }
 
