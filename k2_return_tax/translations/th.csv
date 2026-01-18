@@ -32,3 +32,5 @@ Please save the document before adding attachments., กรุณาบันท
 Registration Department, ฝ่ายทะเบียน
 Accounting Department, ฝ่ายบัญชี
 Completed, เสร็จสิ้น
+Missing Fields, ข้อมูลที่ยังไม่ระบุ
+Mandatory fields required in {0},จำเป็นต้องระบุข้อมูลในฟิลด์ที่มีเครื่องหมายดอกจัน {0},

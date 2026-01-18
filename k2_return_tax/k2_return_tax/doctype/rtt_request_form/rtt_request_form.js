@@ -13,7 +13,13 @@ frappe.ui.form.on('RTT Request Form', {
         set_description_field(frm);
     },
 
-    send_request_button(frm) {
+    async send_request_button(frm) {
+        try {
+            await frm.save();
+        } catch (e) {
+            return;
+        }
+
         let dialog = new frappe.ui.Dialog({
             title: __("Confirm Action"),
             static: true,
