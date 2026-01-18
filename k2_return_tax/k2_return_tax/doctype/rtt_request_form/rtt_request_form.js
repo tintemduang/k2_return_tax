@@ -2,6 +2,8 @@ frappe.ui.form.on('RTT Request Form', {
     refresh(frm) {
         form_utils.align_button(frm, "send_request_button", "center");
         form_utils.style_button(frm, "send_request_button", "info");
+
+        validate_add_attachments(frm);
     },
 
     onload: function(frm) {
@@ -94,4 +96,24 @@ function get_user(callback) {
             }
         }
     });
+}
+
+function validate_add_attachments(frm) {
+    const grid = frm.fields_dict['attachment_table'].grid;
+
+    if (grid._add_row_logged) return;
+    grid._add_row_logged = true;
+
+    const original = grid.add_new_row.bind(grid);
+
+    grid.add_new_row = function () {
+
+        if (frm.is_new()) {
+            return frappe.show_alert({
+                message: __('Please save the document before adding attachments.'),
+                indicator: 'red'
+            });
+        }
+        return original();
+    };
 }
