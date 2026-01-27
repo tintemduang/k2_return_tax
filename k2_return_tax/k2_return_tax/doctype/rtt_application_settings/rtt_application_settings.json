@@ -1,0 +1,174 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-01-27 21:22:07.012403",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "is_enable",
+  "section_break_endpoint",
+  "endpoint_url",
+  "k2_api_key",
+  "k2_service_keywords_section",
+  "get_worklist",
+  "get_task",
+  "column_break_qaze",
+  "start_workflow",
+  "action_workflow",
+  "release_task",
+  "redirect_task",
+  "section_break_workflow",
+  "workflow",
+  "redirect_worklist_section",
+  "custom_impersonate_user_lookup_doctype",
+  "custom_impersonate_user_filter",
+  "column_break_uxlz",
+  "custom_impersonate_user_value",
+  "custom_after_redirect_success"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "fieldname": "is_enable",
+   "fieldtype": "Check",
+   "label": "Enable K2 Workflow"
+  },
+  {
+   "depends_on": "is_enable",
+   "fieldname": "section_break_endpoint",
+   "fieldtype": "Section Break",
+   "label": "Credentials"
+  },
+  {
+   "fieldname": "endpoint_url",
+   "fieldtype": "Data",
+   "label": "K2 Base URL",
+   "mandatory_depends_on": "is_enable"
+  },
+  {
+   "fieldname": "k2_api_key",
+   "fieldtype": "Data",
+   "label": "API Key",
+   "mandatory_depends_on": "is_enable"
+  },
+  {
+   "fieldname": "k2_service_keywords_section",
+   "fieldtype": "Section Break",
+   "label": "K2 Service Keywords"
+  },
+  {
+   "default": "getworklist",
+   "fieldname": "get_worklist",
+   "fieldtype": "Data",
+   "label": "Get Worklist"
+  },
+  {
+   "default": "gettask",
+   "fieldname": "get_task",
+   "fieldtype": "Data",
+   "label": "Get Task"
+  },
+  {
+   "fieldname": "column_break_qaze",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "startworkflow",
+   "fieldname": "start_workflow",
+   "fieldtype": "Data",
+   "label": "Start workflow"
+  },
+  {
+   "default": "customaction",
+   "fieldname": "action_workflow",
+   "fieldtype": "Data",
+   "label": "Action workflow"
+  },
+  {
+   "default": "releasetask",
+   "fieldname": "release_task",
+   "fieldtype": "Data",
+   "label": "Release Task"
+  },
+  {
+   "default": "redirecttask",
+   "fieldname": "redirect_task",
+   "fieldtype": "Data",
+   "label": "Redirect Task"
+  },
+  {
+   "depends_on": "is_enable",
+   "fieldname": "section_break_workflow",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "workflow",
+   "fieldtype": "Table",
+   "label": "Workflow",
+   "options": "K2 Workflow Settings Detail"
+  },
+  {
+   "fieldname": "redirect_worklist_section",
+   "fieldtype": "Section Break",
+   "label": "Redirect Worklist"
+  },
+  {
+   "description": "Enter lookup doctype for impersonate_user filter. if empty default is \"User\".",
+   "fieldname": "custom_impersonate_user_lookup_doctype",
+   "fieldtype": "Link",
+   "label": "Custom impersonate user lookup doctype",
+   "options": "DocType"
+  },
+  {
+   "description": "Enter whitelist method url that return custom filter for impersonate_user filter. if empty impersonate_user is not filter.",
+   "fieldname": "custom_impersonate_user_filter",
+   "fieldtype": "Data",
+   "label": "Custom impersonate user filter"
+  },
+  {
+   "fieldname": "column_break_uxlz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Enter whitelist method url that transform value of impersonate_user that selected into username when define custom lookup doctype.",
+   "fieldname": "custom_impersonate_user_value",
+   "fieldtype": "Data",
+   "label": "Custom impersonate user value"
+  },
+  {
+   "description": "Enter whitelist method url that will trigger after redirect task success.",
+   "fieldname": "custom_after_redirect_success",
+   "fieldtype": "Data",
+   "label": "Custom event after redirect success"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-01-27 21:25:51.748133",
+ "modified_by": "Administrator",
+ "module": "K2 Return Tax",
+ "name": "RTT Application Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "All"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

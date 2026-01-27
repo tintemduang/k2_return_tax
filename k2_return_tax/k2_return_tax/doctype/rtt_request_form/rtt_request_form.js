@@ -19,11 +19,11 @@ frappe.ui.form.on('RTT Request Form', {
     },
 
     async send_request_button(frm) {
-        try {
-            await frm.save();
-        } catch (e) {
-            return;
-        }
+        // try {
+        //     await frm.save();
+        // } catch (e) {
+        //     return;
+        // }
 
         let dialog = new frappe.ui.Dialog({
             title: __("Confirm Action"),
@@ -37,19 +37,37 @@ frappe.ui.form.on('RTT Request Form', {
                     </div>`
                 },
                 {
-                    fieldtype: "data",
+                    fieldtype: "Data",
                     fieldname: "username",
+                    label: "Username",
+                    default: frm.doc.employee_name,
                 },
                 {
-                    fieldtype: "link",
+                    fieldtype: "Link",
                     options: "RTT Action",
                     fieldname: "action",
+                    label: "Action",
+                    reqd: 1,
+                    default: "ส่งพิจารณา",
                 },
 
             ],
             primary_action_label: __("Confirm"),
             primary_action() {
+                frappe.show_alert({message: __('Sending Request...'), indicator: 'blue'});
                 dialog.hide();
+                frappe.call({
+                    doc: frm.doc,
+                    method: "submit_workflow",
+                    freeze: true,
+                    freeze_message: __("Submitting Document..."),
+                    callback: function (response) {
+                        console.log("response: ", response)
+                        // if (response) {
+                        //     window.location.reload();
+                        // }
+                    }
+                });
             },
             secondary_action_label: __("Cancel"),
             secondary_action() {
