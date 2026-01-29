@@ -46,8 +46,16 @@ class RTTRequestForm(Document):
 
         data_fields = [
             {
-                "name": "ParmDocID",
+                "name": "parm_document_number",
                 "value": self.name
+            },
+            {
+                "name": "parm_branch",
+                "value": self.branch
+            },
+            {
+                "name": "parm_plate_number",
+                "value": self.plate_number
             }
         ]
 
