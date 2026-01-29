@@ -23,6 +23,7 @@ class RTTRequestForm(Document):
         settings = frappe.get_single("RTT Application Settings")
         api_endpoint = settings.endpoint_url
         api_key = settings.k2_api_key
+        k2_method = settings.start_workflow
         workflow_name = None
         current_doctype = self.doctype
         username = frappe.get_doc('User', frappe.session.user).username
@@ -57,7 +58,7 @@ class RTTRequestForm(Document):
         })
 
         try:
-            response = requests.post(api_endpoint + '/' +'startworkflow', headers=headers, data=payload)
+            response = requests.post(api_endpoint + '/' + k2_method, headers=headers, data=payload)
             return response.text
         except Exception as e:
             frappe.throw(str(e))
