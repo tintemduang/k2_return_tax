@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_copy": 1,
  "allow_rename": 1,
  "creation": "2026-01-27 21:22:07.012403",
  "doctype": "DocType",
@@ -143,10 +144,11 @@
   }
  ],
  "grid_page_length": 50,
+ "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-01-27 21:25:51.748133",
+ "modified": "2026-01-30 16:44:15.145588",
  "modified_by": "Administrator",
  "module": "K2 Return Tax",
  "name": "RTT Application Settings",
