@@ -24,20 +24,9 @@ class RTTRequestForm(Document):
         api_endpoint = settings.endpoint_url
         api_key = settings.k2_api_key
         k2_method = settings.start_workflow
-        workflow_name = None
+        workflow_name = settings.workflow_name
         current_doctype = self.doctype
         username = frappe.get_doc('User', frappe.session.user).username
-
-        for wf in settings.workflow:
-            if wf.ref_doctype == current_doctype:
-                workflow_name = wf.workflow_name.strip()
-                workflow_name = workflow_name.replace('/', '\\').replace('\\\\', '\\')
-                break
-
-        if not workflow_name:
-            frappe.throw(
-                f"ไม่พบ Workflow สำหรับ Doctype: {current_doctype} ใน RTT Application Settings"
-            )
 
         headers = {
             'x-api-key': api_key,

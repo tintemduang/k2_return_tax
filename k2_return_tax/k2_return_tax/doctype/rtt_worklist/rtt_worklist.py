@@ -22,6 +22,7 @@ class RTTWorklist(Document):
 
     @staticmethod
     def get_list(args):
+        doctype = args.get("doctype")
         start = cint(args.get('start')) or 0
         page_length = cint(args.get('page_length')) or 20
         input_filters = args.get('filters')
@@ -55,7 +56,7 @@ class RTTWorklist(Document):
                 'value': str(item[3])
             } for item in api_filters
         ]
-        task_list = get_tasks(filters=r_api_filters)['task_list']
+        task_list = get_tasks(doctype = doctype, filters = r_api_filters)['task_list']
         RTTWorklist._task_count = len(task_list)
 
         input_order = args.get('order_by')
@@ -88,7 +89,7 @@ class RTTWorklist(Document):
         pass
 
 @frappe.whitelist()
-def get_tasks(**kwargs):
+def get_tasks(doctype=None, **kwargs):
     #region parameters
     parameters = {
         'filters':[],
@@ -100,25 +101,25 @@ def get_tasks(**kwargs):
     filters = parameters.get('filters')
     headers = {}
     task_list = []
-    workflow_name_list = ['Frappe_K2\\PowerFlow_TRN']
-   
-    user_name = frappe.get_doc('User', frappe.session.user).username
-    
-    api_endpoint = "https://k2-web-uat.srisawadpower.com/Frappe_API/api/K2ProcessAPI/getworklist"
-    
-    k2_api_key = "aaa0252d8b334cfabe4ee0ea7a360582"
+    settings = frappe.get_single("RTT Application Settings")
+    api_endpoint = settings.endpoint_url
+    api_key = settings.k2_api_key
+    k2_method = settings.get_worklist
+    workflow_name_list = settings.workflow_name
+    current_doctype = doctype
+    username = frappe.get_doc('User', frappe.session.user).username
 
     headers = {
-        'x-api-key': k2_api_key,
+        'x-api-key': api_key,
         'Content-Type': 'application/json'
     }
     payload = json.dumps({
-        'imperSonateUsername': user_name,
+        'imperSonateUsername': username,
         'filters': filters
     })
 
     try:
-        response = requests.post(api_endpoint,headers=headers,data=payload)
+        response = requests.post(api_endpoint + '/' + k2_method, headers=headers, data=payload)
         data = response.json()
     except Exception as e:
         return {'task_list' : []}
@@ -172,13 +173,13 @@ def map_k2_operator(operator):
 def sort_objects(objects, sort_string):
     all_property = ['start_date',
         'folio',
-        # 'activity_name',
+        'activity_name',
         'status',
         'serial_number',
         'workflow_display_name',
-        # 'workflow_id',
+        'workflow_id',
         'form_url',
-        # 'authorization_level',
+        'authorization_level',
     ]
     property_name, sort_order = parse_sort_string(sort_string)
     if(property_name in all_property):

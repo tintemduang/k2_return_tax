@@ -6,11 +6,13 @@
  "engine": "InnoDB",
  "field_order": [
   "folio",
+  "status",
+  "activity_name",
+  "start_date",
   "serial_number",
   "workflow_display_name",
   "task_status",
   "requester",
-  "start_date",
   "form_url"
  ],
  "fields": [
@@ -41,20 +43,32 @@
   },
   {
    "fieldname": "start_date",
-   "fieldtype": "Date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
    "label": "Start Date"
   },
   {
    "fieldname": "form_url",
    "fieldtype": "Data",
    "label": "Form URL"
+  },
+  {
+   "fieldname": "activity_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Activity Name"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "label": "Status"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_virtual": 1,
  "links": [],
- "modified": "2026-01-30 16:50:38.787640",
+ "modified": "2026-01-31 14:07:52.285237",
  "modified_by": "Administrator",
  "module": "K2 Return Tax",
  "name": "RTT Worklist",
@@ -76,5 +90,6 @@
  "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "folio"
 }

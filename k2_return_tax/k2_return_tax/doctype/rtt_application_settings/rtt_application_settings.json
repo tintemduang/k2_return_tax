@@ -19,7 +19,7 @@
   "release_task",
   "redirect_task",
   "section_break_workflow",
-  "workflow",
+  "workflow_name",
   "redirect_worklist_section",
   "custom_impersonate_user_lookup_doctype",
   "custom_impersonate_user_filter",
@@ -103,12 +103,6 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "workflow",
-   "fieldtype": "Table",
-   "label": "Workflow",
-   "options": "K2 Workflow Settings Detail"
-  },
-  {
    "fieldname": "redirect_worklist_section",
    "fieldtype": "Section Break",
    "label": "Redirect Worklist"
@@ -141,6 +135,11 @@
    "fieldname": "custom_after_redirect_success",
    "fieldtype": "Data",
    "label": "Custom event after redirect success"
+  },
+  {
+   "fieldname": "workflow_name",
+   "fieldtype": "Data",
+   "label": "Workflow Name"
   }
  ],
  "grid_page_length": 50,
@@ -148,7 +147,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-01-30 16:44:15.145588",
+ "modified": "2026-01-31 12:56:52.538697",
  "modified_by": "Administrator",
  "module": "K2 Return Tax",
  "name": "RTT Application Settings",
