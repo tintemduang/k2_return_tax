@@ -2,12 +2,11 @@ import frappe
 
 @frappe.whitelist(methods=["POST"])
 def update_status(
-    doctype,
+    document_name,
     document_number,
     status
 ):
-    doc = frappe.get_doc(doctype, document_number)
-
+    doc = frappe.get_doc(document_name, document_number)
     doc.document_status = status
 
     doc.save(ignore_permissions=True)
@@ -16,7 +15,7 @@ def update_status(
     return {
         "result": "success",
         "action": "update_status",
-        "doctype": doctype,
+        "document_name": document_name,
         "document_number": document_number,
         "status": status
     }

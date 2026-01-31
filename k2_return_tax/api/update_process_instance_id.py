@@ -2,11 +2,11 @@ import frappe
 
 @frappe.whitelist(methods=["POST"])
 def update_process_instance_id(
-    doctype,
+    document_name,
     document_number,
     process_instance_id
 ):
-    doc = frappe.get_doc(doctype, document_number)
+    doc = frappe.get_doc(document_name, document_number)
     doc.process_instance_id = process_instance_id
 
     doc.save(ignore_permissions=True)
@@ -15,7 +15,7 @@ def update_process_instance_id(
     return {
         "result": "success",
         "action": "update_process_instance_id",
-        "doctype": doctype,
+        "document_name": document_name,
         "document_number": document_number,
         "process_instance_id": process_instance_id
     }
