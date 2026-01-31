@@ -19,12 +19,6 @@ frappe.ui.form.on('RTT Request Form', {
     },
 
     async send_request_button(frm) {
-        // try {
-        //     await frm.save();
-        // } catch (e) {
-        //     return;
-        // }
-
         let dialog = new frappe.ui.Dialog({
             title: __("Confirm Action"),
             static: true,
@@ -54,7 +48,6 @@ frappe.ui.form.on('RTT Request Form', {
             ],
             primary_action_label: __("Confirm"),
             primary_action() {
-                frappe.show_alert({message: __('Sending Request...'), indicator: 'blue'});
                 dialog.hide();
                 frappe.call({
                     doc: frm.doc,
@@ -63,9 +56,28 @@ frappe.ui.form.on('RTT Request Form', {
                     freeze_message: __("Submitting Document..."),
                     callback: function (response) {
                         console.log("response: ", response)
-                        // if (response) {
-                        //     window.location.reload();
-                        // }
+                        let process_instance_id = response.message;
+
+                        if (!process_instance_id || !/^\d+$/.test(process_instance_id)) {
+                            frappe.show_alert({message: __('Failed to send request. Please try again.'), indicator: 'red'});
+                            return;
+                        }
+                        else {
+                            frappe.call({
+                                method: "k2_return_tax.api.update_process_instance_id.update_process_instance_id",
+                                type: "POST",
+                                args: {
+                                    doctype: cur_frm.doctype,
+                                    document_number: cur_frm.doc.name,
+                                    process_instance_id: process_instance_id
+                                },
+                                callback: function (r) {
+                                    if (!r.exc) {
+                                        frappe.show_alert({message: __('Request Sent Successfully: ' + process_instance_id), indicator: 'green'});
+                                    }
+                                }
+                            });
+                        }
                     }
                 });
             },
