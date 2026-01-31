@@ -9,6 +9,7 @@ frappe.ui.form.on('RTT Request Form', {
         set_hide_selected_option(frm, 'action_history_table');
         set_hide_section(frm);
         get_document_description(frm);
+        get_task(frm);
     },
 
     onload: function(frm) {
@@ -210,6 +211,64 @@ function get_document_description(frm) {
             if (r.message) {
                 frm.set_value('document_status_description', r.message.description);
             }
+        }
+    });
+}
+
+function get_task(frm) {
+    let serial_number = frappe.route_options.serial_number;
+    frappe.route_options = {};
+    if (serial_number) {
+        console.log("serial_number: ", serial_number);
+        frappe.call({
+            doc: frm.doc,
+            method: "get_task",
+            args: {
+                serial_number: serial_number
+            },
+            freeze: true,
+            freeze_message: __("Getting Task..."),
+            callback: function (response) {
+                const actions = response.message?.actions || [];
+                set_action_button(frm, actions, serial_number);
+            }
+        });
+    }
+}
+
+function set_action_button(frm, actions, serial_number) {
+    if (!actions || actions.length === 0) return;
+
+    actions.forEach(action => {
+        let btn = frm.add_custom_button(action.name, function () {
+            action_workflow(frm, action.name, serial_number);
+        });
+
+        btn.removeClass("btn-default");
+        
+        if (action.name === "Approve") {
+            btn.addClass("btn-success");
+        } else if (action.name === "Reject") {
+            btn.addClass("btn-danger");
+        }
+    });
+}
+
+function action_workflow(frm, action, serial_number) {
+    frappe.call({
+        doc: frm.doc,
+        method: "action_workflow",
+        args: {
+            action: action,
+            serial_number: serial_number
+        },
+        freeze: true,
+        freeze_message: __("Progressing Document..."),
+        callback: function (response) {
+            console.log("response: ", response)
+            // if (response) {
+            //     window.location.reload();
+            // }
         }
     });
 }

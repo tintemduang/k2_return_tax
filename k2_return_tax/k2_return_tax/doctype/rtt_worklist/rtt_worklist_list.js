@@ -5,7 +5,7 @@ frappe.listview_settings['RTT Worklist'] = {
         listview.page.sidebar.remove();
         setTimeout(() => {
             listview.page.clear_primary_action();
-        }, 500);
+        }, 1000);
     },
 
     get_indicator: function (doc) {

@@ -62,3 +62,55 @@ class RTTRequestForm(Document):
             return response.text
         except Exception as e:
             frappe.throw(str(e))
+
+    @frappe.whitelist()
+    def get_task(self, serial_number):
+        settings = frappe.get_single("RTT Application Settings")
+        api_endpoint = settings.endpoint_url
+        api_key = settings.k2_api_key
+        k2_method = settings.get_task
+        workflow_name = settings.workflow_name
+        username = frappe.get_doc('User', frappe.session.user).username
+
+        headers = {
+        'x-api-key': api_key,
+        'Content-Type': 'application/json'
+        }
+
+        payload = json.dumps({
+            'imperSonateUsername': username,
+                'SerialNumber': serial_number
+        })
+
+        try:
+            response = requests.post(api_endpoint + '/' + k2_method, headers=headers, data=payload)
+            return response.json()
+        except Exception as e:
+            frappe.throw(str(e))
+
+    @frappe.whitelist()
+    def action_workflow(self, action, serial_number):
+        settings = frappe.get_single("RTT Application Settings")
+        api_endpoint = settings.endpoint_url
+        api_key = settings.k2_api_key
+        k2_method = settings.action_workflow
+        workflow_name = settings.workflow_name
+        username = frappe.get_doc('User', frappe.session.user).username
+
+        headers = {
+        'x-api-key': api_key,
+        'Content-Type': 'application/json'
+        }
+
+        payload = json.dumps({
+            'imperSonateUsername': username,
+            'workflowName': workflow_name,
+            'CustomAction': action,
+            'SerialNumber': serial_number
+        })
+
+        try:
+            response = requests.post(api_endpoint + '/' + k2_method, headers=headers, data=payload)
+            return response.text
+        except Exception as e:
+            frappe.throw(str(e))
