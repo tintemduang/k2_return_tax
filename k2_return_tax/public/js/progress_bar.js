@@ -24,7 +24,7 @@ function render_progress_bar_by_state(frm, currentState) {
 
     const states = [
         "สาขา",
-        "ทะเบียน",
+        "ฝ่ายทะเบียน",
         "ฝ่ายบัญชี",
         "เสร็จสิ้น"
     ];
