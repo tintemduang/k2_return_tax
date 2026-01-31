@@ -6,7 +6,8 @@ from frappe.utils import now_datetime
 
 class RTTRequestForm(Document):
     def before_save(self):
-        self.document_status = 1010
+        if self.get("__islocal"):
+            self.document_status = 1010
 
     def after_insert(self):
         self.append("action_history_table", {
