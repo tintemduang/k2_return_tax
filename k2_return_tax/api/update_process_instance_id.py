@@ -1,22 +1,21 @@
 import frappe
 
 @frappe.whitelist(methods=["POST"])
-def update_status(
+def update_process_instance_id(
     doctype,
     document_number,
-    status
+    process_instance_id
 ):
     doc = frappe.get_doc(doctype, document_number)
-
-    doc.document_status = status
+    doc.process_instance_id = process_instance_id
 
     doc.save(ignore_permissions=True)
     frappe.db.commit()
 
     return {
         "result": "success",
-        "action": "update_status",
+        "action": "update_process_instance_id",
         "doctype": doctype,
         "document_number": document_number,
-        "status": status
+        "process_instance_id": process_instance_id
     }
