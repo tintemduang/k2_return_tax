@@ -3,9 +3,11 @@ frappe.listview_settings['RTT Worklist'] = {
     hide_name_filter: true,
     onload(listview) {
         listview.page.sidebar.remove();
-        setTimeout(() => {
-            listview.page.clear_primary_action();
-        }, 1000);
+        hidden_create_button(listview);
+    },
+
+    refresh(listview) {
+        hidden_create_button(listview);
     },
 
     get_indicator: function (doc) {
@@ -24,4 +26,10 @@ frappe.listview_settings['RTT Worklist'] = {
         const doc_no = doc.folio.split(':')[0].trim();
         return `/app/rtt-request-form/${doc_no}?serial_number=${doc.serial_number}`;
     }
+}
+
+function hidden_create_button(listview) {
+    setTimeout(() => {
+        listview.page.clear_primary_action();
+    }, 300);
 }
