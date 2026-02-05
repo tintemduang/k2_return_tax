@@ -69,7 +69,7 @@ frappe.ui.form.on('RTT Request Form', {
                                 method: "k2_return_tax.api.update_process_instance_id.update_process_instance_id",
                                 type: "POST",
                                 args: {
-                                    doctype: cur_frm.doctype,
+                                    document_name: cur_frm.doctype,
                                     document_number: cur_frm.doc.name,
                                     process_instance_id: process_instance_id
                                 },
