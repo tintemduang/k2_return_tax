@@ -9,7 +9,8 @@ frappe.ui.form.on('RTT Request Form', {
         set_hide_selected_option(frm, 'action_history_table');
         set_hide_section(frm);
         get_document_description(frm);
-        get_task(frm);
+        k2_get_task(frm);
+        set_send_request_button(frm);
     },
 
     onload: function(frm) {
@@ -215,7 +216,7 @@ function get_document_description(frm) {
     });
 }
 
-function get_task(frm) {
+function k2_get_task(frm) {
     let serial_number = frappe.route_options.serial_number;
     frappe.route_options = {};
     if (serial_number) {
@@ -270,5 +271,12 @@ function action_workflow(frm, action, serial_number) {
             //     window.location.reload();
             // }
         }
+    });
+}
+
+function set_send_request_button(frm) {
+    if(!frm.is_new())
+    frm.add_custom_button(__('Send Request'), function () {
+        frappe.msgprint('Send Request button clicked');
     });
 }
