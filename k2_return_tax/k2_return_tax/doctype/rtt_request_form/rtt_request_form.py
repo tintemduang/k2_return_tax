@@ -10,16 +10,7 @@ class RTTRequestForm(Document):
             self.document_status = 1010
 
     def after_insert(self):
-        self.append("action_history_table", {
-            "username": frappe.session.user,
-            "employee_code": self.employee_code,
-            "employee_name": self.employee_name,
-            "action": "สร้างเอกสาร",
-            "action_date_time": now_datetime(),
-            "remark": None
-        })
-
-        self.save(ignore_permissions=True)
+        self.create_action_history("Create Document")
 
     @frappe.whitelist()
     def submit_workflow(self):
@@ -114,3 +105,20 @@ class RTTRequestForm(Document):
             return response.text
         except Exception as e:
             frappe.throw(str(e))
+            
+    @frappe.whitelist()
+    def create_action_history(self, action, remark=None, user=None):
+        if not user:
+            user = frappe.session.user
+
+        self.append("action_history_table", {
+            "username": user,
+            "employee_code": self.employee_code,
+            "employee_name": self.employee_name,
+            "action": action,
+            "action_date_time": now_datetime(),
+            "remark": remark
+        })
+
+        self.save(ignore_permissions=True)
+
