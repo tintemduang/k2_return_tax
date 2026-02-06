@@ -1,8 +1,7 @@
 frappe.ui.form.on('RTT Request Form', {
     refresh(frm) {
-        form_utils.align_button(frm, "send_request_button", "center");
-        form_utils.style_button(frm, "send_request_button", "info");
-        form_utils.align_button(frm, "attachment_info_button", "right");
+        form_utils.style_button(frm, "application_manual_button", "info");
+        form_utils.align_button(frm, "application_manual_button", "right");
         progress_bar.render_progress_bar(frm);
         validate_add_attachments(frm);
         set_hide_add_remove_buttons(frm, 'action_history_table');
@@ -20,77 +19,9 @@ frappe.ui.form.on('RTT Request Form', {
         set_description_field(frm);
     },
 
-    async send_request_button(frm) {
-        let dialog = new frappe.ui.Dialog({
-            title: __("Confirm Action"),
-            static: true,
-            fields: [
-                {
-                    fieldtype: "HTML",
-                    fieldname: "confirm_msg",
-                    options: `<div style="font-size:14px;">
-                        ${__('Confirm to send the document for approval?')}
-                    </div>`
-                },
-                {
-                    fieldtype: "Data",
-                    fieldname: "username",
-                    label: "Username",
-                    default: frm.doc.employee_name,
-                },
-                {
-                    fieldtype: "Link",
-                    options: "RTT Action",
-                    fieldname: "action",
-                    label: "Action",
-                    reqd: 1,
-                    default: "ส่งพิจารณา",
-                },
-
-            ],
-            primary_action_label: __("Confirm"),
-            primary_action() {
-                dialog.hide();
-                frappe.call({
-                    doc: frm.doc,
-                    method: "submit_workflow",
-                    freeze: true,
-                    freeze_message: __("Submitting Document..."),
-                    callback: function (response) {
-                        console.log("response: ", response)
-                        let process_instance_id = response.message;
-
-                        if (!process_instance_id || !/^\d+$/.test(process_instance_id)) {
-                            frappe.show_alert({message: __('Failed to send request. Please try again.'), indicator: 'red'});
-                            return;
-                        }
-                        else {
-                            frappe.call({
-                                method: "k2_return_tax.api.update_process_instance_id.update_process_instance_id",
-                                type: "POST",
-                                args: {
-                                    document_name: cur_frm.doctype,
-                                    document_number: cur_frm.doc.name,
-                                    process_instance_id: process_instance_id
-                                },
-                                callback: function (r) {
-                                    if (!r.exc) {
-                                        frappe.show_alert({message: __('Request Sent Successfully: ' + process_instance_id), indicator: 'green'});
-                                    }
-                                }
-                            });
-                        }
-                    }
-                });
-            },
-            secondary_action_label: __("Cancel"),
-            secondary_action() {
-                dialog.hide();
-            }
-        });
-        dialog.show();
+    application_manual_button: function(frm) {
+        window.open('https://frappe.io/framework', '_blank');
     }
-
 });
 
 function set_form_header(frm) {
@@ -277,6 +208,66 @@ function action_workflow(frm, action, serial_number) {
 function set_send_request_button(frm) {
     if(!frm.is_new())
     frm.add_custom_button(__('Send Request'), function () {
-        frappe.msgprint('Send Request button clicked');
+        let dialog = new frappe.ui.Dialog({
+            title: __("Confirm Action"),
+            static: true,
+            fields: [
+                {
+                    fieldtype: "Data",
+                    fieldname: "username",
+                    label: "Username",
+                    default: frm.doc.employee_name,
+                },
+                {
+                    fieldtype: "Link",
+                    options: "RTT Action",
+                    fieldname: "action",
+                    label: "Action",
+                    reqd: 1,
+                    default: "ส่งพิจารณา",
+                },
+
+            ],
+            primary_action_label: __("Confirm"),
+            primary_action() {
+                dialog.hide();
+                frappe.call({
+                    doc: frm.doc,
+                    method: "submit_workflow",
+                    freeze: true,
+                    freeze_message: __("Submitting Document..."),
+                    callback: function (response) {
+                        console.log("response: ", response)
+                        let process_instance_id = response.message;
+
+                        if (!process_instance_id || !/^\d+$/.test(process_instance_id)) {
+                            frappe.show_alert({message: __('Failed to send request. Please try again.'), indicator: 'red'});
+                            return;
+                        }
+                        else {
+                            frappe.call({
+                                method: "k2_return_tax.api.update_process_instance_id.update_process_instance_id",
+                                type: "POST",
+                                args: {
+                                    document_name: cur_frm.doctype,
+                                    document_number: cur_frm.doc.name,
+                                    process_instance_id: process_instance_id
+                                },
+                                callback: function (r) {
+                                    if (!r.exc) {
+                                        frappe.show_alert({message: __('Request Sent Successfully: ' + process_instance_id), indicator: 'green'});
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            },
+            secondary_action_label: __("Cancel"),
+            secondary_action() {
+                dialog.hide();
+            }
+        });
+        dialog.show();
     });
 }

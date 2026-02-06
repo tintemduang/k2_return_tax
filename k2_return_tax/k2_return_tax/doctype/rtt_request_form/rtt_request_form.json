@@ -46,11 +46,10 @@
   "attachment_table",
   "action_history_section",
   "action_history_table",
-  "action_section",
-  "column_break_dxbd",
-  "column_break_ptty",
-  "send_request_button",
-  "column_break_vkpj",
+  "section_break_svoo",
+  "column_break_juge",
+  "column_break_msps",
+  "application_manual_button",
   "admin_tab",
   "document_status",
   "process_instance_id"
@@ -204,23 +203,6 @@
    "options": "RTT Attachment"
   },
   {
-   "fieldname": "column_break_dxbd",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_ptty",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_vkpj",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "send_request_button",
-   "fieldtype": "Button",
-   "label": "Send Request"
-  },
-  {
    "fieldname": "vehicle_type",
    "fieldtype": "Select",
    "label": "Vehicle Type",
@@ -275,10 +257,6 @@
    "label": "Workflow State"
   },
   {
-   "fieldname": "action_section",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "form_section",
    "fieldtype": "Section Break"
   },
@@ -318,13 +296,31 @@
    "fieldname": "process_instance_id",
    "fieldtype": "Data",
    "label": "Process Instance ID"
+  },
+  {
+   "fieldname": "section_break_svoo",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "column_break_juge",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_msps",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "application_manual_button",
+   "fieldtype": "Button",
+   "label": "Application Manaul"
   }
  ],
  "grid_page_length": 50,
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-31 15:43:09.315207",
+ "modified": "2026-02-06 16:50:23.310742",
  "modified_by": "Administrator",
  "module": "K2 Return Tax",
  "name": "RTT Request Form",
@@ -344,7 +340,6 @@
    "write": 1
   }
  ],
- "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
