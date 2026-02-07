@@ -23,13 +23,13 @@ progress_bar.render_progress_bar = function render_progress_from_status(frm) {
 function render_progress_bar_by_state(frm, currentState) {
 
     const states = [
-        "สาขา",
-        "ฝ่ายทะเบียน",
-        "ฝ่ายบัญชี",
-        "เสร็จสิ้น"
+        { key: "Branch State", label: __("Branch") },
+        { key: "Registration State", label: __("Registration") },
+        { key: "Accounting State", label: __("Accounting") },
+        { key: "Completed State", label: __("Completed") }
     ];
 
-    const currentIndex = states.findIndex(s => s === currentState);
+    const currentIndex = states.findIndex(s => s.key === currentState);
 
     if (currentIndex === -1) {
         console.warn("Unknown state:", currentState);
@@ -38,7 +38,7 @@ function render_progress_bar_by_state(frm, currentState) {
 
     let html = `
         <div class="custom-progress">
-            ${states.map((label, index) => {
+            ${states.map((state, index) => {
                 let cls = "pending";
                 let content = index + 1;
 
@@ -52,7 +52,7 @@ function render_progress_bar_by_state(frm, currentState) {
                 return `
                     <div class="step ${cls}">
                         <div class="circle">${content}</div>
-                        <div class="label">${label}</div>
+                        <div class="label">${state.label}</div>
                     </div>
                 `;
             }).join("")}
