@@ -316,12 +316,16 @@ function action_dialog(frm, action, serial_number=null) {
 
 function update_document_status(frm, action, state) {
     let status;
-    if (action === "Send Request") {
+    if (action == "Send Request" || action == "Resubmit") {
         status = "2000";
-    } else if (action === "Approve" && state === "Registration State") {
+    } else if (action  == "Approve" && state == "Registration State") {
         status = "3000";
-    } else if (action === "Approve" && state === "Accounting State") {
+    } else if (action == "Approve" && state == "Accounting State") {
         status = "9000";
+    } else if (action == "Reject" ) {
+        status = "1020";
+    } else if (action == "Cancel" ) {
+        status = "8000";
     }
 
     return frappe.call({
