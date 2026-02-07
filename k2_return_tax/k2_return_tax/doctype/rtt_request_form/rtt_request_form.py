@@ -9,9 +9,6 @@ class RTTRequestForm(Document):
         if self.get("__islocal"):
             self.document_status = 1010
 
-    def after_insert(self):
-        self.create_action_history("Create Document")
-
     @frappe.whitelist()
     def submit_workflow(self):
         settings = frappe.get_single("RTT Application Settings")

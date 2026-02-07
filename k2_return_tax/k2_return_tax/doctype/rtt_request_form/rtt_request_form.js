@@ -19,6 +19,15 @@ frappe.ui.form.on('RTT Request Form', {
         set_description_field(frm);
     },
 
+    after_save: function(frm) {
+        if (!frm.__action_history_created) {
+            frm.__action_history_created = true;
+            create_action_history(frm, "Create Document", "Document created successfully." ).then(() => {
+                window.location.reload();
+            });
+        }
+    },
+
     application_manual_button: function(frm) {
         window.open('https://frappe.io/framework', '_blank');
     }
@@ -226,7 +235,12 @@ function set_send_request_button(frm) {
                     reqd: 1,
                     default: "ส่งพิจารณา",
                 },
-
+                {
+                    fieldtype: "Small Text",
+                    fieldname: "remark",
+                    label: "Remark",
+                    reqd: 0,
+                }
             ],
             primary_action_label: __("Confirm"),
             primary_action() {
@@ -248,7 +262,7 @@ function set_send_request_button(frm) {
                             frappe.call({
                                 method: "k2_return_tax.api.update_process_instance_id.update_process_instance_id",
                                 type: "POST",
-                                args: {
+                                args: { 
                                     document_name: cur_frm.doctype,
                                     document_number: cur_frm.doc.name,
                                     process_instance_id: process_instance_id
@@ -257,6 +271,10 @@ function set_send_request_button(frm) {
                                     if (!r.exc) {
                                         frappe.show_alert({message: __('Request Sent Successfully: ' + process_instance_id), indicator: 'green'});
                                     }
+
+                                    frm.reload_doc().then(() => {
+                                        create_action_history(frm, "Send Request", dialog.get_value("remark"));
+                                    });
                                 }
                             });
                         }
@@ -269,5 +287,22 @@ function set_send_request_button(frm) {
             }
         });
         dialog.show();
+    });
+}
+
+function create_action_history(frm, action, remark) {
+    return frappe.call({
+        doc: frm.doc,
+        method: "create_action_history",
+        args: {
+            action: action,
+            remark: remark
+        },
+        callback: function (r) {
+            if (!r.exc) {
+                frappe.show_alert({message: __('Action history created'), indicator: 'green'});
+                frm.reload_doc();
+            }
+        }
     });
 }
