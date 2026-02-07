@@ -56,7 +56,7 @@ class RTTRequestForm(Document):
             frappe.db.commit()
 
             return response.text
-            
+
         except Exception as e:
             frappe.throw(str(e))
 
@@ -123,14 +123,14 @@ class RTTRequestForm(Document):
             "employee_name": self.employee_name,
             "action": action,
             "action_date_time": now_datetime(),
-            "remark": remark
+            "remark": remark or ""
         })
 
         self.save(ignore_permissions=True)
 
-    @frappe.whitelist(methods=["POST"])
-    def update_document_status(document_name, document_number, status):
-        doc = frappe.get_doc(document_name, document_number)
-        doc.document_status = status
+    @frappe.whitelist()
+    def update_document_status(self, status):
+        self.document_status = status
 
-        doc.save(ignore_permissions=True)
+        self.save(ignore_permissions=True)
+        

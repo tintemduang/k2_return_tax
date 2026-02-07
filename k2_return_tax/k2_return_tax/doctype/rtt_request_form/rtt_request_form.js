@@ -156,6 +156,21 @@ function get_document_description(frm) {
     });
 }
 
+async function get_document_state(frm) {
+    const r = await frappe.call({
+        method: "frappe.client.get_value",
+        args: {
+            doctype: "RTT Form Status",
+            filters: {
+                name: frm.doc.document_status
+            },
+            fieldname: "state"
+        }
+    });
+
+    return r.message?.state;
+}
+
 function k2_get_task(frm) {
     let serial_number = frappe.route_options.serial_number;
     frappe.route_options = {};
@@ -207,9 +222,6 @@ function action_workflow(frm, action, serial_number) {
         freeze_message: __("Progressing Document..."),
         callback: function (response) {
             console.log("response: ", response)
-            // if (response) {
-            //     window.location.reload();
-            // }
         }
     });
 }
@@ -280,9 +292,15 @@ function action_dialog(frm, action) {
                     method: workflow_action,
                     freeze: true,
                     freeze_message: __("Submitting Document..."),
-                    callback: function (response) {
+                    callback: async function (response) {
                         console.log("response: ", response)
-                        create_action_history(frm, dialog.get_value("action"), dialog.get_value("remark"));
+
+                        const action = dialog.get_value("action");
+                        const remark = dialog.get_value("remark");
+                        const state = await get_document_state(frm);
+
+                        await update_document_status(frm, action, state);
+                        await create_action_history(frm, action, remark);
                     }
                 });
             },
@@ -292,4 +310,30 @@ function action_dialog(frm, action) {
             }
         });
         dialog.show();
+}
+
+function update_document_status(frm, action, state) {
+    let status;
+    if (action === "Send Request") {
+        status = "2000";
+    } else if (action === "Approve" && state === "Registration State") {
+        status = "3000";
+    } else if (action === "Approve" && state === "Accounting State") {
+        status = "4000";
+    }
+
+    return frappe.call({
+        doc: frm.doc,
+        method: "update_document_status",
+        args: {
+            status: status
+        },
+        freeze: true,
+        freeze_message: __("Updating Document Status..."),
+        callback: function (response) {
+            if (response) {
+                // frm.reload_doc();
+            }
+        }
+    });
 }
