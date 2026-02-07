@@ -227,10 +227,14 @@ function action_workflow(frm, action, serial_number) {
 }
 
 function set_send_request_button(frm) {
-    if(!frm.is_new())
-    frm.add_custom_button(__('Send Request'), function () {
-        action_dialog(frm, "Send Request");
-    });
+    if (frm.doc.document_status == 1010) {
+        const btn_send_request = frm.add_custom_button(__('Send Request'), function () {
+            action_dialog(frm, "Send Request");
+        });
+
+        btn_send_request.removeClass("btn-default");
+        btn_send_request.addClass("btn-success");
+    }
 }
 
 function create_action_history(frm, action, remark) {
