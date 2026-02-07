@@ -17,6 +17,7 @@ frappe.ui.form.on('RTT Request Form', {
         set_document_defaults(frm);
         set_readonly_fields(frm);
         set_description_field(frm);
+        set_duplicate_data(frm);
     },
 
     after_save: function(frm) {
@@ -340,4 +341,12 @@ function update_document_status(frm, action, state) {
             }
         }
     });
+}
+
+function set_duplicate_data(frm) {
+    if (frm.is_new()) {
+        frm.set_value('process_instance_id', '');
+        frm.clear_table("action_history_table");
+        frm.refresh_field("action_history_table");
+    }
 }
