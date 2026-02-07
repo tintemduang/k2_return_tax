@@ -212,19 +212,7 @@ function set_action_button(frm, actions, serial_number) {
 }
 
 function action_workflow(frm, action, serial_number) {
-    frappe.call({
-        doc: frm.doc,
-        method: "action_workflow",
-        args: {
-            action: action,
-            serial_number: serial_number
-        },
-        freeze: true,
-        freeze_message: __("Progressing Document..."),
-        callback: function (response) {
-            console.log("response: ", response)
-        }
-    });
+    action_dialog(frm, action, serial_number);
 }
 
 function set_send_request_button(frm) {
@@ -255,7 +243,7 @@ function create_action_history(frm, action, remark) {
     });
 }
 
-function action_dialog(frm, action) {
+function action_dialog(frm, action, serial_number=null) {
     let dialog = new frappe.ui.Dialog({
             title: __("Confirm Action"),
             static: true,
@@ -284,17 +272,24 @@ function action_dialog(frm, action) {
             primary_action_label: __("Confirm"),
             primary_action() {
                 let workflow_action;
+                let args = {};
+
                 if (dialog.get_value("action") === "Send Request") {
                     workflow_action = "submit_workflow";
                 }
                 else {
                     workflow_action = "action_workflow";
+                    args = {
+                        action: dialog.get_value("action"),
+                        serial_number: serial_number
+                    };
                 }
 
                 dialog.hide();
                 frappe.call({
                     doc: frm.doc,
                     method: workflow_action,
+                    args: args,
                     freeze: true,
                     freeze_message: __("Submitting Document..."),
                     callback: async function (response) {
@@ -306,6 +301,8 @@ function action_dialog(frm, action) {
 
                         await update_document_status(frm, action, state);
                         await create_action_history(frm, action, remark);
+
+                        frappe.set_route("List", "RTT Worklist");
                     }
                 });
             },
@@ -324,7 +321,7 @@ function update_document_status(frm, action, state) {
     } else if (action === "Approve" && state === "Registration State") {
         status = "3000";
     } else if (action === "Approve" && state === "Accounting State") {
-        status = "4000";
+        status = "9000";
     }
 
     return frappe.call({
