@@ -47,7 +47,16 @@ class RTTRequestForm(Document):
 
         try:
             response = requests.post(api_endpoint + '/' + k2_method, headers=headers, data=payload)
+
+            response.raise_for_status()
+            process_instance_id = int(response.text)
+
+            self.process_instance_id = process_instance_id
+            self.save(ignore_permissions=True)
+            frappe.db.commit()
+
             return response.text
+            
         except Exception as e:
             frappe.throw(str(e))
 
@@ -119,3 +128,9 @@ class RTTRequestForm(Document):
 
         self.save(ignore_permissions=True)
 
+    @frappe.whitelist(methods=["POST"])
+    def update_document_status(document_name, document_number, status):
+        doc = frappe.get_doc(document_name, document_number)
+        doc.document_status = status
+
+        doc.save(ignore_permissions=True)
