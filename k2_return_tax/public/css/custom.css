@@ -11,6 +11,7 @@
 /* ---------- Style for section headers (End) ---------- */
 
 
+
 /* ---------- Progress Bar (Start) --------- */
 .custom-progress {
     display: flex;
@@ -70,3 +71,18 @@
     color: #374151;
 }
 /* ---------- Progress Bar (End) --------- */
+
+
+
+/* ---------- Open Task row action button (Start) ---------- */
+.list-row button.btn-action {
+    background-color: #3B82F6 !important; /* เขียว */
+    color: #fff !important;
+    border-color: #3B82F6 !important;
+}
+
+.list-row button.btn-action:hover {
+    background-color: #2563EB !important;
+    border-color: #1D4ED8 !important;
+}
+/* ---------- Open Task row action button (End) ---------- */

@@ -25,7 +25,24 @@ frappe.listview_settings['RTT Worklist'] = {
     get_form_link(doc) {
         const doc_no = doc.folio.split(':')[0].trim();
         return `/app/rtt-request-form/${doc_no}?serial_number=${doc.serial_number}`;
-    }
+    },
+
+    button: {
+        show(doc) {
+            return true;
+        },
+        get_label() {
+            return ("Open Task");
+        },
+        get_description(doc) {
+            return __("Open Task")
+        },
+        action(doc) {
+            const doc_no = doc.folio.split(':')[0].trim();
+            const url = `/app/rtt-request-form/${doc_no}?serial_number=${doc.serial_number}`;
+            window.open(url, '_blank').focus();
+        }
+    },
 }
 
 function hidden_create_button(listview) {
