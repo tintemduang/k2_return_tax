@@ -203,9 +203,9 @@ function set_action_button(frm, actions, serial_number) {
 
         btn.removeClass("btn-default");
         
-        if (action.name === "Approve") {
+        if (action.name == "Approve" || action.name == "Resubmit") {
             btn.addClass("btn-success");
-        } else if (action.name === "Reject") {
+        } else if (action.name == "Reject" || action.name == "Cancel") {
             btn.addClass("btn-danger");
         }
     });
@@ -253,6 +253,7 @@ function action_dialog(frm, action, serial_number=null) {
                     fieldname: "username",
                     label: "Username",
                     default: frm.doc.employee_name,
+                    read_only: 1,
                 },
                 {
                     fieldtype: "Link",
@@ -261,6 +262,7 @@ function action_dialog(frm, action, serial_number=null) {
                     label: "Action",
                     reqd: 1,
                     default: action,
+                    read_only: 1,
                 },
                 {
                     fieldtype: "Small Text",
@@ -306,12 +308,16 @@ function action_dialog(frm, action, serial_number=null) {
                     }
                 });
             },
-            secondary_action_label: __("Cancel"),
+            secondary_action_label: __("Close"),
             secondary_action() {
                 dialog.hide();
             }
         });
         dialog.show();
+
+        dialog.get_primary_btn()
+            .removeClass('btn-primary')
+            .addClass('btn-success');
 }
 
 function update_document_status(frm, action, state) {
