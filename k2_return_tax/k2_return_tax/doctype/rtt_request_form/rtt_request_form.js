@@ -29,6 +29,18 @@ frappe.ui.form.on('RTT Request Form', {
         }
     },
 
+    tax_renewal_amount(frm) {
+        calculate_transfer_amount(frm);
+    },
+
+    vehicle_inspection_fee(frm) {
+        calculate_transfer_amount(frm);
+    },
+    
+    other_fee(frm) {
+        calculate_transfer_amount(frm);
+    },
+
     application_manual_button: function(frm) {
         window.open('https://frappe.io/framework', '_blank');
     }
@@ -356,4 +368,13 @@ function set_duplicate_data(frm) {
         frm.clear_table("action_history_table");
         frm.refresh_field("action_history_table");
     }
+}
+
+function calculate_transfer_amount(frm) {
+    let tax = frm.doc.tax_renewal_amount || 0;
+    let inspection = frm.doc.vehicle_inspection_fee || 0;
+    let other = frm.doc.other_fee || 0;
+
+    let total = tax + inspection + other;
+    frm.set_value('transfer_amount', total);
 }
