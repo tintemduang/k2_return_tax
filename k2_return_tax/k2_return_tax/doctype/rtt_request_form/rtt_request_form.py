@@ -9,6 +9,17 @@ class RTTRequestForm(Document):
         if self.get("__islocal"):
             self.document_status = 1010
 
+    def after_insert(self):
+        self.append("action_history_table", {
+            "username": frappe.session.user,
+            "employee_code": self.employee_code,
+            "employee_name": self.employee_name,
+            "action": "Create Document",
+            "action_date_time": now_datetime(),
+            "remark": "Document created successfully."
+        })
+        self.save(ignore_permissions=True)
+
     @frappe.whitelist()
     def submit_workflow(self):
         settings = frappe.get_single("RTT Application Settings")

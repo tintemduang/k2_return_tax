@@ -21,11 +21,8 @@ frappe.ui.form.on('RTT Request Form', {
     },
 
     after_save: function(frm) {
-        if (!frm.__action_history_created) {
-            frm.__action_history_created = true;
-            create_action_history(frm, "Create Document", "Document created successfully." ).then(() => {
-                window.location.reload();
-            });
+        if (!frm.doc.action_history_table || frm.doc.action_history_table.length === 0) {
+            window.location.reload();
         }
     },
 
