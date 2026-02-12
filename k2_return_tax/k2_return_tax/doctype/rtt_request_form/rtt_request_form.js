@@ -21,9 +21,7 @@ frappe.ui.form.on('RTT Request Form', {
     },
 
     after_save: function(frm) {
-        if (!frm.doc.action_history_table || frm.doc.action_history_table.length === 0) {
-            window.location.reload();
-        }
+        window.location.reload();
     },
 
     tax_renewal_amount(frm) {
