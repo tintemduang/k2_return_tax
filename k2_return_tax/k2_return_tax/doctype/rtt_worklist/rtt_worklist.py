@@ -84,10 +84,6 @@ class RTTWorklist(Document):
     def get_stats(args):
         pass
 
-    @staticmethod
-    def get_stats(args):
-        pass
-
 @frappe.whitelist()
 def get_tasks(doctype=None, **kwargs):
     #region parameters
@@ -203,3 +199,16 @@ def sort_by_status(task):
         'Allocated': 2,
     }
     return status_order[task['task_status']]
+
+@frappe.whitelist()
+def get_worklist_for_homepage(start=0, page_length=10):
+    args = {
+        "doctype": "RTT Worklist",
+        "start": start,
+        "page_length": page_length,
+        "filters": [],
+        "fields": []
+    }
+
+    data = RTTWorklist.get_list(args)
+    return data
