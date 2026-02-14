@@ -311,7 +311,7 @@ function action_dialog(frm, action, serial_number=null) {
                         await update_document_status(frm, action, state);
                         await create_action_history(frm, action, remark);
 
-                        frappe.set_route("List", "RTT Worklist");
+                        frappe.set_route("List", "RTT Homepage");
                     }
                 });
             },

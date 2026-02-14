@@ -1,13 +1,100 @@
+frappe.dom.set_style(`
+    .custom-blue-btn {
+        background-color: #0d6efd !important;
+        color: #fff !important;
+        border: none !important;
+    }
+
+    .custom-blue-btn:hover {
+        opacity: 0.9;
+    }
+`);
+
 frappe.ui.form.on("RTT Homepage", {
 	refresh(frm) {
-        frm.current_page = 0;   // เริ่มหน้าแรก
+        frm.page.set_title("Return Tax - Homepage");
+        frm.disable_save();
+        frm.current_page = 0;
+
+        build_homepage_layout(frm);
+        load_k2_summary(frm);
         load_k2_worklist(frm);
+        load_action_buttons(frm);
         load_rtt_request_table(frm);
 	},
 });
 
-function load_k2_worklist(frm) {
+function build_homepage_layout(frm) {
 
+    frm.fields_dict.homepage_html.$wrapper.html(`
+        <div class="k2-summary"></div>
+        <div class="k2-worklist"></div>
+        <div class="k2-action-buttons"></div>
+        <div class="rtt-history"></div>
+    `);
+}
+
+function load_k2_summary(frm) {
+    frappe.call({
+        method: "k2_return_tax.k2_return_tax.doctype.rtt_worklist.rtt_worklist.get_worklist_summary",
+        callback: function (r) {
+
+            let data = r.message || {
+                total: 0,
+                today: 0,
+                read: 0,
+                unread: 0
+            };
+
+            let html = `
+                <div class="card" style="padding:15px; margin-bottom:15px;">
+                    <div style="display:flex; gap:15px; flex-wrap:wrap;">
+                        
+                        ${build_summary_card("Total Tasks", data.total)}
+                        ${build_summary_card("Today Tasks", data.today)}
+                        ${build_summary_card("Read Tasks", data.read)}
+                        ${build_summary_card("Unread Tasks", data.unread)}
+
+                    </div>
+                </div>
+            `;
+
+            if (!frm.fields_dict.homepage_html.$wrapper.find(".k2-summary").length) {
+                frm.fields_dict.homepage_html.$wrapper(
+                    `<div class="k2-summary"></div>`
+                );
+            }
+
+            frm.fields_dict.homepage_html.$wrapper
+                .find(".k2-summary")
+                .html(html);
+        }
+    });
+}
+
+function build_summary_card(title, value) {
+    return `
+        <div style="
+            flex:1;
+            min-width:200px;
+            background:#f8f9fa;
+            border-radius:8px;
+            padding:20px;
+            text-align:center;
+            box-shadow:0 2px 5px rgba(0,0,0,0.05);
+        ">
+            <div style="font-weight:600; font-size:14px;">
+                ${title}
+            </div>
+            <div style="margin-top:10px; font-size:28px; font-weight:bold;">
+                ${value}
+            </div>
+        </div>
+        <br>
+    `;
+}
+
+function load_k2_worklist(frm) {
     if (!frm.k2_page) {
         frm.k2_page = 0;
     }
@@ -90,12 +177,12 @@ function load_k2_worklist(frm) {
                             ${__("Next")}
                         </button>
                     </div>
-                </div>
+                </div><br>
             `;
 
             // ถ้ายังไม่มี container
             if (!frm.fields_dict.homepage_html.$wrapper.find(".k2-worklist").length) {
-                frm.fields_dict.homepage_html.$wrapper.prepend(
+                frm.fields_dict.homepage_html.$wrapper(
                     `<div class="k2-worklist"></div>`
                 );
             }
@@ -127,8 +214,78 @@ function load_k2_worklist(frm) {
     });
 }
 
-function load_rtt_request_table(frm) {
+function load_action_buttons(frm) {
+    let html = `
+        <div class="card" style="padding:20px; margin-bottom:15px;">
+            <div style="
+                display:flex;
+                gap:15px;
+                flex-wrap:wrap;
+            ">
 
+                ${build_action_button(
+                    __("Create New Document"),
+                    "btn-primary",
+                    "bi-plus-circle",
+                    "/app/rtt-request-form/new"
+                )}
+
+                ${build_action_button(
+                    __("View All Created Documents"),
+                    "btn-dark",
+                    "bi-folder",
+                    "/app/rtt-request-form"
+                )}
+
+                ${build_action_button(
+                    __("View Document Submission History"),
+                    "btn-dark",
+                    "bi-send",
+                    "#"
+                )}
+
+                ${build_action_button(
+                    __("View Document Approval History"),
+                    "btn-dark",
+                    "bi-check-circle",
+                    "#"
+                )}
+
+            </div>
+        </div>
+    `;
+
+    frm.fields_dict.homepage_html.$wrapper
+        .find(".k2-action-buttons")
+        .html(html);
+}
+
+function build_action_button(title, type, icon, link) {
+
+    let btn_class = type === "btn-primary"
+        ? "custom-blue-btn"
+        : type;
+
+    return `
+        <a href="${link}" 
+           class="btn ${btn_class}"
+           style="
+                flex:1;
+                min-width:220px;
+                padding:14px;
+                border-radius:12px;
+                font-weight:600;
+                text-align:center;
+                box-shadow:0 4px 10px rgba(0,0,0,0.08);
+                transition:all 0.2s ease;
+           "
+        >
+            ${title}
+        </a>
+    `;
+}
+
+function load_rtt_request_table(frm) {
     if (!frm.current_page) {
         frm.current_page = 0;
     }

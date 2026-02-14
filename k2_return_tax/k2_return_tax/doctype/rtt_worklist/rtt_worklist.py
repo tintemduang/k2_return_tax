@@ -212,3 +212,13 @@ def get_worklist_for_homepage(start=0, page_length=10):
 
     data = RTTWorklist.get_list(args)
     return data
+
+@frappe.whitelist()
+def get_worklist_summary():
+
+    return {
+        "total": 25,
+        "today": 5,
+        "read": 12,
+        "unread": 13
+    }
